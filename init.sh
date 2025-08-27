@@ -59,3 +59,32 @@ echo "✅ Установка завершена!"
 echo "ℹ️  Выйдите и зайдите снова, чтобы изменения (docker group) вступили в силу."
 echo "ℹ️  Версия Node.js: $(node -v 2>/dev/null || echo 'не установлена')"
 echo "ℹ️  Версия npm: $(npm -v 2>/dev/null || echo 'не установлена')"
+
+echo "=== Самопроверка установленных пакетов ==="
+
+check() {
+    local name="$1"
+    local cmd="$2"
+    if command -v $cmd >/dev/null 2>&1; then
+        echo "✅ $name: $($cmd --version 2>/dev/null | head -n 1)"
+    else
+        echo "❌ $name: не найден"
+    fi
+}
+
+check "Python3" "python3"
+check "Pip3" "pip3"
+check "Git" "git"
+check "Fish" "fish"
+check "Docker" "docker"
+check "Docker Compose" "docker compose"
+check "Node.js" "node"
+check "npm" "npm"
+check "curl" "curl"
+check "wget" "wget"
+check "vim" "vim"
+check "htop" "htop"
+
+echo
+echo "=== Проверка завершена ==="
+
