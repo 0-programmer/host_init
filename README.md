@@ -16,4 +16,4 @@
 Выполните команду (без скачивания файлов вручную):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/USERNAME/my-ubuntu-setup/main/setup.sh | bash
+curl -fsSL https://raw.githubusercontent.com/0-programmer/host_init_script/main/init.sh | bash
