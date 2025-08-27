@@ -3,8 +3,12 @@
 set -e  # завершать при ошибке
 set -u  # ошибка при обращении к несуществующей переменной
 
-echo "=== Обновление системы ==="
-sudo apt update -y && sudo apt upgrade -y
+echo "=== Полное обновление системы перед установкой ==="
+sudo apt update -y
+sudo apt full-upgrade -y
+sudo apt dist-upgrade -y
+sudo apt autoremove -y
+sudo apt clean
 
 echo "=== Установка основных утилит ==="
 sudo apt install -y \
