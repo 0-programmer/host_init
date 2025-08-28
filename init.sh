@@ -21,7 +21,8 @@ sudo apt install -y \
     software-properties-common \
     ca-certificates \
     gnupg \
-    lsb-release
+    lsb-release \
+    micro
 
 echo "=== Установка Python и pip ==="
 sudo apt install -y python3 python3-pip python3-venv
@@ -83,6 +84,7 @@ check "curl" "curl"
 check "wget" "wget"
 check "vim" "vim"
 check "htop" "htop"
+check "Micro" "micro"
 
 echo
 echo "=== Проверка завершена ==="
