@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 
-set -e  # завершать при ошибке
-set -u  # ошибка при обращении к несуществующей переменной
-
 echo "=== Обновление системы перед установкой ==="
-sudo apt update -y
+sudo apt update -y || true
 
-# Попробуем починить возможные ошибки, если есть
+# Чиним битые или незавершённые пакеты
 sudo dpkg --configure -a || true
 sudo apt --fix-broken install -y || true
 
-# Обновляем установленные пакеты
-sudo apt upgrade -y
+# Пробуем апгрейд без падения при ошибках
+if ! sudo apt upgrade -y; then
+    echo "⚠️  Обновление прошло с ошибками, продолжаем установку..."
+fi
 
 # Чистим систему
-sudo apt autoremove -y
-sudo apt clean
+sudo apt autoremove -y || true
+sudo apt clean || true
+
 
 echo "=== Установка основных утилит ==="
 sudo apt install -y \
