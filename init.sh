@@ -21,7 +21,8 @@ sudo apt install -y \
     software-properties-common \
     ca-certificates \
     gnupg \
-    lsb-release
+    lsb-release \
+    micro
 
 echo "=== Установка Python и pip ==="
 sudo apt install -y python3 python3-pip python3-venv
@@ -75,6 +76,7 @@ check() {
 check "Python3" "python3"
 check "Pip3" "pip3"
 check "Git" "git"
+check "Micro" "micro"
 check "Fish" "fish"
 check "Docker" "docker"
 check "Docker Compose" "docker compose"
