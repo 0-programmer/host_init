@@ -13,7 +13,7 @@
 
 ## ⚡ Установка
 
-Выполните команду (без скачивания файлов вручную):
+Выполните команду :
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0-programmer/host_init/main/init.sh | bash
+curl -fsSL https://raw.githubusercontent.com/0-programmer/host_init/main/init.sh | bash 2>&1 | tee setup.log
