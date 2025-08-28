@@ -3,10 +3,17 @@
 set -e  # завершать при ошибке
 set -u  # ошибка при обращении к несуществующей переменной
 
-echo "=== Полное обновление системы перед установкой ==="
+echo "=== Обновление системы перед установкой ==="
 sudo apt update -y
-sudo apt full-upgrade -y
-sudo apt dist-upgrade -y
+
+# Попробуем починить возможные ошибки, если есть
+sudo dpkg --configure -a || true
+sudo apt --fix-broken install -y || true
+
+# Обновляем установленные пакеты
+sudo apt upgrade -y
+
+# Чистим систему
 sudo apt autoremove -y
 sudo apt clean
 
@@ -17,12 +24,12 @@ sudo apt install -y \
     unzip \
     vim \
     htop \
+    micro \
     build-essential \
     software-properties-common \
     ca-certificates \
     gnupg \
-    lsb-release \
-    micro
+    lsb-release
 
 echo "=== Установка Python и pip ==="
 sudo apt install -y python3 python3-pip python3-venv
@@ -58,8 +65,7 @@ sudo apt autoremove -y && sudo apt clean
 echo
 echo "✅ Установка завершена!"
 echo "ℹ️  Выйдите и зайдите снова, чтобы изменения (docker group) вступили в силу."
-echo "ℹ️  Версия Node.js: $(node -v 2>/dev/null || echo 'не установлена')"
-echo "ℹ️  Версия npm: $(npm -v 2>/dev/null || echo 'не установлена')"
+echo
 
 echo "=== Самопроверка установленных пакетов ==="
 
@@ -76,7 +82,6 @@ check() {
 check "Python3" "python3"
 check "Pip3" "pip3"
 check "Git" "git"
-check "Micro" "micro"
 check "Fish" "fish"
 check "Docker" "docker"
 check "Docker Compose" "docker compose"
@@ -85,8 +90,8 @@ check "npm" "npm"
 check "curl" "curl"
 check "wget" "wget"
 check "vim" "vim"
+check "micro" "micro"
 check "htop" "htop"
 
 echo
 echo "=== Проверка завершена ==="
-
