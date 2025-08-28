@@ -1,21 +1,14 @@
 #!/usr/bin/env bash
 
-echo "=== Обновление системы перед установкой ==="
-sudo apt update -y || true
+set -e  # завершать при ошибке
+set -u  # ошибка при обращении к несуществующей переменной
+set -x  # показывать команды (для отладки)
 
-# Чиним битые или незавершённые пакеты
-sudo dpkg --configure -a || true
-sudo apt --fix-broken install -y || true
-
-# Пробуем апгрейд без падения при ошибках
-if ! sudo apt upgrade -y; then
-    echo "⚠️  Обновление прошло с ошибками, продолжаем установку..."
-fi
-
-# Чистим систему
-sudo apt autoremove -y || true
-sudo apt clean || true
-
+echo "=== Полное обновление системы перед установкой ==="
+sudo apt update -y
+sudo apt full-upgrade -y
+sudo apt autoremove -y
+sudo apt clean
 
 echo "=== Установка основных утилит ==="
 sudo apt install -y \
@@ -24,7 +17,6 @@ sudo apt install -y \
     unzip \
     vim \
     htop \
-    micro \
     build-essential \
     software-properties-common \
     ca-certificates \
@@ -90,7 +82,6 @@ check "npm" "npm"
 check "curl" "curl"
 check "wget" "wget"
 check "vim" "vim"
-check "micro" "micro"
 check "htop" "htop"
 
 echo
