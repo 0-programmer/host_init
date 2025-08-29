@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-LOG_FILE="./setup.log"
+LOG_FILE="PWD/setup.log"
 
 # Сохраняем stdout/stderr
 exec 3>&1 4>&2
