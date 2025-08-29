@@ -4,7 +4,7 @@ set -e  # завершать при ошибке
 set -u  # ошибка при обращении к несуществующей переменной
 echo "DEBUG FLAGS: $-"
 #info comments
-BLUE="\033[1;34m"
+BLUE="\033[1m\033[34m"
 RESET="\033[0m"
 
 step() {
