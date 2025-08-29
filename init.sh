@@ -4,13 +4,37 @@ set -e  # завершать при ошибке
 set -u  # ошибка при обращении к несуществующей переменной
 set -x  # показывать команды (для отладки)
 
-echo "=== Полное обновление системы перед установкой ==="
+#info comments
+BLUE="\033[1;34m"
+RESET="\033[0m"
+
+step() {
+  echo -e "${BLUE}=== $1 ===${RESET}"
+}
+
+#success comments
+GREEN="\033[1;32m"
+RESET="\033[0m"
+
+success() {
+  echo -e "${GREEN}=== $1 ===${RESET}"
+}
+
+#error comments
+RED="\033[1;31m"
+RESET="\033[0m"
+
+error() {
+  echo -e "${RED}=== $1 ===${RESET}"
+}
+
+step "=== Полное обновление системы перед установкой ==="
 sudo apt update -y
 sudo apt full-upgrade -y
 sudo apt autoremove -y
 sudo apt clean
 
-echo "=== Установка основных утилит ==="
+step "=== Установка основных утилит ==="
 sudo apt install -y \
     curl \
     wget \
@@ -24,17 +48,16 @@ sudo apt install -y \
     lsb-release \
     micro
 
-echo "=== Установка Python и pip ==="
+step "=== Установка Python и pip ==="
 sudo apt install -y python3 python3-pip python3-venv
 
-echo "=== Установка Git ==="
+step "=== Установка Git ==="
 sudo apt install -y git
 
-echo "=== Установка Fish Shell ==="
+step "=== Установка Fish Shell ==="
 sudo apt install -y fish
 
-echo "=== Установка Docker ==="
-# Добавим официальный репозиторий Docker
+step "=== Установка Docker ==="
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -49,30 +72,30 @@ sudo apt-get update -y
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-echo "=== Добавление пользователя в группу docker ==="
+step "=== Добавление пользователя в группу docker ==="
 sudo usermod -aG docker "$USER"
 
 echo "=== Установка Node.js (LTS) и npm ==="
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt install -y nodejs
 
-echo "=== Очистка ==="
+step "=== Очистка ==="
 sudo apt autoremove -y && sudo apt clean
 
 echo
-echo "✅ Установка завершена!"
-echo "ℹ️  Выйдите и зайдите снова, чтобы изменения (docker group) вступили в силу."
+success "✅ Установка завершена!"
+step "ℹ️  Выйдите и зайдите снова, чтобы изменения (docker group) вступили в силу."
 echo
 
-echo "=== Самопроверка установленных пакетов ==="
+step "=== Самопроверка установленных пакетов ==="
 
 check() {
     local name="$1"
     local cmd="$2"
     if command -v $cmd >/dev/null 2>&1; then
-        echo "✅ $name: $($cmd --version 2>/dev/null | head -n 1)"
+        success "✅ $name: $($cmd --version 2>/dev/null | head -n 1)"
     else
-        echo "❌ $name: не найден"
+        error "❌ $name: не найден"
     fi
 }
 
@@ -91,4 +114,4 @@ check "htop" "htop"
 check "Micro" "micro"
 
 echo
-echo "=== Проверка завершена ==="
+success "=== Проверка завершена ==="
