@@ -8,7 +8,7 @@ echo "DEBUG FLAGS: $-"
 BLUE="\033[1m\033[34m"
 RESET="\033[0m"
 
-step() {
+info() {
    echo ""
    echo -e "${BLUE}=== $1 ===${RESET}"
    echo ""
@@ -34,13 +34,13 @@ error() {
    echo ""
 }
 
-step "=== Полное обновление системы перед установкой ==="
+info "=== Полное обновление системы перед установкой ==="
 sudo apt update -y
 sudo apt full-upgrade -y
 sudo apt autoremove -y
 sudo apt clean
 
-step "=== Установка основных утилит ==="
+info "=== Установка основных утилит ==="
 sudo apt install -y \
     curl \
     wget \
@@ -54,16 +54,16 @@ sudo apt install -y \
     lsb-release \
     micro
 
-step "=== Установка Python и pip ==="
+info "=== Установка Python и pip ==="
 sudo apt install -y python3 python3-pip python3-venv
 
-step "=== Установка Git ==="
+info "=== Установка Git ==="
 sudo apt install -y git
 
-step "=== Установка Fish Shell ==="
+info "=== Установка Fish Shell ==="
 sudo apt install -y fish
 
-step "=== Установка Docker ==="
+info "=== Установка Docker ==="
 # Add Docker's official GPG key:
 sudo install -m 0755 -d /etc/apt/keyrings
 sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
@@ -78,22 +78,22 @@ sudo apt-get update -y
 
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-step "=== Добавление пользователя в группу docker ==="
+info "=== Добавление пользователя в группу docker ==="
 sudo usermod -aG docker "$USER"
 
 echo "=== Установка Node.js (LTS) и npm ==="
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt install -y nodejs
 
-step "=== Очистка ==="
+info "=== Очистка ==="
 sudo apt autoremove -y && sudo apt clean
 
 echo
 success "✅ Установка завершена!"
-step "ℹ️  Выйдите и зайдите снова, чтобы изменения (docker group) вступили в силу."
+info "ℹ️  Выйдите и зайдите снова, чтобы изменения (docker group) вступили в силу."
 echo
 
-step "=== Самопроверка установленных пакетов ==="
+info "=== Самопроверка установленных пакетов ==="
 
 check() {
     local name="$1"
