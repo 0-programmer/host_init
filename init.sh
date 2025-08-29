@@ -3,28 +3,35 @@
 set -e  # завершать при ошибке
 set -u  # ошибка при обращении к несуществующей переменной
 echo "DEBUG FLAGS: $-"
-#info comments
+
+#info messages
 BLUE="\033[1m\033[34m"
 RESET="\033[0m"
 
 step() {
-  echo -e "${BLUE}=== $1 ===${RESET}"
+   echo ""
+   echo -e "${BLUE}=== $1 ===${RESET}"
+   echo ""
 }
 
-#success comments
+#success messages
 GREEN="\033[1;32m"
 RESET="\033[0m"
 
 success() {
-  echo -e "${GREEN}=== $1 ===${RESET}"
+   echo ""
+   echo -e "${GREEN}=== $1 ===${RESET}"
+   echo ""
 }
 
-#error comments
+#error messages
 RED="\033[1;31m"
 RESET="\033[0m"
 
 error() {
-  echo -e "${RED}=== $1 ===${RESET}"
+   echo ""
+   echo -e "${RED}=== $1 ===${RESET}"
+   echo ""
 }
 
 step "=== Полное обновление системы перед установкой ==="
