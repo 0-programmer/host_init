@@ -1,17 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-LOG_FILE="$HOME/setup.log"
-
-# 1. открываем fd 5 на запись в лог
-exec 5>>"$LOG_FILE"
-
-# 2. указываем bash, что трассировка пойдёт в fd 5
-BASH_XTRACEFD=5
-
-# 3. включаем трассировку
-set -x
-
 #info messages
 BLUE="\033[1m\033[34m"
 RESET="\033[0m"
