@@ -1,10 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ "${1:-}" == "--debug" ]]; then
-  set -x
-fi
-
 #info messages
 BLUE="\033[1m\033[34m"
 RESET="\033[0m"
