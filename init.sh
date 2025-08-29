@@ -1,8 +1,19 @@
 #!/usr/bin/env bash
 
-set -e  # завершать при ошибке
-set -u  # ошибка при обращении к несуществующей переменной
-echo "DEBUG FLAGS: $-"
+set -euo pipefail
+
+LOG_FILE="./setup.log"
+
+# Сохраняем stdout/stderr
+exec 3>&1 4>&2
+
+# Вывод обычных сообщений на экран + лог через tee
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+# Трассировка команд bash в отдельный fd
+BASH_XTRACEFD=5
+exec 5>>"$LOG_FILE"
+set -x
 
 #info messages
 BLUE="\033[1m\033[34m"
