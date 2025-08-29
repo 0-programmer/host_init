@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
-
 set -euo pipefail
 
-LOG_FILE="setup.log"
+LOG_FILE="$HOME/setup.log"
 
-# Сохраняем stdout/stderr
-exec 3>&1 4>&2
-
-# Вывод обычных сообщений на экран + лог через tee
-exec > >(tee -a "$LOG_FILE") 2>&1
-
-# Трассировка команд bash в отдельный fd
-BASH_XTRACEFD=5
+# 1. открываем fd 5 на запись в лог
 exec 5>>"$LOG_FILE"
+
+# 2. указываем bash, что трассировка пойдёт в fd 5
+BASH_XTRACEFD=5
+
+# 3. включаем трассировку
 set -x
 
 #info messages
