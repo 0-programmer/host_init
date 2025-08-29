@@ -16,4 +16,4 @@
 Выполните команду :
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/0-programmer/host_init/main/init.sh | sudo bash 2>&1 | sudo tee setup.log
+curl -fsSL https://raw.githubusercontent.com/0-programmer/host_init/main/init.sh | sudo bash 2>&1 --debug | sudo tee setup.log
