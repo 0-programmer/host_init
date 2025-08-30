@@ -3,8 +3,11 @@ set -euo pipefail
 
 #info messages
 BLUE="\033[1m\033[34m"
+GREEN="\033[1;32m"
+RED="\033[1;31m"
 RESET="\033[0m"
 
+#info messages
 info() {
    echo ""
    echo -e "${BLUE}=== $1 ===${RESET}"
@@ -12,9 +15,6 @@ info() {
 }
 
 #success messages
-GREEN="\033[1;32m"
-RESET="\033[0m"
-
 success() {
    echo ""
    echo -e "${GREEN}=== $1 ===${RESET}"
@@ -22,9 +22,6 @@ success() {
 }
 
 #error messages
-RED="\033[1;31m"
-RESET="\033[0m"
-
 error() {
    echo ""
    echo -e "${RED}=== $1 ===${RESET}"
